@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lời Chúc Bất Ngờ Dành Tặng Em/Anh</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #fcefee, #ffe1f0);
+      font-family: 'Sacramento', cursive;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #d63384;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px #ffa6d0;
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 30px;
+      background: #ff6ea1;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px #ff91c9;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #d63384;
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 1.8rem;
+      max-width: 450px;
+      background: rgba(255, 182, 193, 0.8);
+      padding: 20px 30px;
+      border-radius: 25px;
+      box-shadow: 0 0 15px #ff8dbd;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      user-select: text;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    #message.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Hiệu ứng trái tim bay lên */
+    .heart {
+      position: fixed;
+      width: 25px;
+      height: 25px;
+      background: url('https://i.imgur.com/MaEhf0W.png') no-repeat center;
+      background-size: contain;
+      animation-name: flyUp;
+      animation-timing-function: ease-in;
+      animation-iteration-count: 1;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    @keyframes flyUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-150vh) scale(0.5);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lời Chúc Bất Ngờ Dành Tặng Em Phương Thuý 💖</h1>
+  <button id="btn">Mở lời chúc bất ngờ!</button>
+
+  <div id="message">
+    <!-- Lời chúc sẽ hiện ra ở đây -->
+  </div>
+
+  <audio id="music" loop>
+    <source src="https://files.catbox.moe/7rtjpn.mp3" type="audio/mp3" />
+    Trình duyệt của bạn không hỗ trợ phát nhạc.
+  </audio>
+
+  <script>
+    const btn = document.getElementById('btn');
+    const message = document.getElementById('message');
+    const music = document.getElementById('music');
+
+    const wishes = [
+ "Aaaaa Tại Sao Bé lại ấn ><",
+      "Ngại quá trời ơiiii ><",
+      "Em là lý do khiến mỗi ngày của anh trở nên ý nghĩa 💖",
+      "Anh yêu em hơn tất cả những gì có thể nói thành lời 😘",
+      "Cảm ơn em đã đến và làm trái tim anh rung động 💓",
+      "Yêu em là điều anh sẽ không bao giờ hối hận 🥰",
+      "Mỗi khoảnh khắc bên em là một phép màu ✨",
+      "Anh hứa sẽ mãi ở bên cạnh, che chở cho em 💞",
+      "Em chính là người anh luôn tìm kiếm trong giấc mơ 🌸",
+    ];
+
+    // Tạo hiệu ứng trái tim bay
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = 3000 + Math.random() * 2000 + 'ms';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    let heartInterval;
+
+    btn.addEventListener('click', () => {
+  // Chọn lời chúc bất ngờ ngẫu nhiên
+  const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+  message.textContent = randomWish;
+
+  // Hiện lời chúc
+  message.classList.add('show');
+
+  // Bật nhạc nếu chưa bật
+  if (music.paused) {
+    music.play();
+  }
+
+  // Tạo trái tim bay liên tục trong 5s
+  if (heartInterval) clearInterval(heartInterval);
+  heartInterval = setInterval(createHeart, 300);
+
+  // Dừng tạo trái tim sau 5s
+  setTimeout(() => {
+    clearInterval(heartInterval);
+  }, 5000);
+
+  // Đổi chữ nút khi bấm
+  btn.textContent = '❤️ Yêu Em ❤️';
+   // Bật nhạc nếu chưa bật
+  if (music.paused) {
+    music.play();
+  }
+
+  // Thêm animation trái tim to ra
+  btn.style.transition = "transform 0.6s ease";
+  btn.style.transform = "scale(1.5)";
+
+  // Quay về kích thước bình thường sau 1.5s
+  setTimeout(() => {
+    btn.style.transform = "scale(1)";
+  }, 1500);
+  // Hiện tên bản nhạc sau 2s ở dưới lời chúc
+  setTimeout(() => {
+  // Tạo khối hiển thị thông tin nhạc
+  let musicInfo = document.getElementById('music-info');
+  if (!musicInfo) {
+    musicInfo = document.createElement('div');
+    musicInfo.id = 'music-info';
+    musicInfo.style.marginTop = '20px';
+    musicInfo.style.fontSize = '1.2rem';
+    musicInfo.style.color = '#a83279';
+    musicInfo.style.fontWeight = '600';
+    musicInfo.style.textAlign = 'center';
+    musicInfo.style.fontFamily = "'Sacramento', cursive";
+
+    // Thêm tên nhạc và nút
+    musicInfo.innerHTML = `
+      🎵 Nhạc nền: <strong>Beautiful in White</strong><br/>
+      <a href="https://youtu.be/MfHAt5F2uhk?si=LZWzOyvJKidLQyN3" target="_blank" style="
+        margin-top: 10px;
+        display: inline-block;
+        padding: 8px 16px;
+        background: #ff69b4;
+        color: white;
+        text-decoration: none;
+        border-radius: 20px;
+        font-size: 1rem;
+        box-shadow: 0 4px 10px rgba(255,105,180,0.6);
+        transition: background 0.3s ease;
+      ">▶️ Mở bài nhạc</a>
+    `;
+
+    message.parentNode.insertBefore(musicInfo, message.nextSibling);
+  }
+}, 2000);
+
+
+
+});
+
+  </script>
+
+</body>
+</html>
